@@ -1,0 +1,35 @@
+{
+  "batch": 1,
+  "timestamp": "20250829_101619",
+  "accuracy": 1.0,
+  "sample_size": 3,
+  "correct_count": 3,
+  "error_analysis": {
+    "error_patterns": {},
+    "common_mistakes": [],
+    "error_examples": []
+  },
+  "detailed_results": [
+    {
+      "sentence": "미드게임을 통해서는 각종 성장 시스템과 콘텐츠가 순환되며 성장을 만끽할 수 있도록 설계됐다.",
+      "expected": "사실형,긍정,과거,확실",
+      "predicted": "사실형,긍정,과거,확실",
+      "correct": true,
+      "original_idx": 13937
+    },
+    {
+      "sentence": "인기의 시작은 패션과 음악이었지만, 양준일을 꽃피게 한 건 그의 인성과 철학이었다.",
+      "expected": "사실형,긍정,과거,확실",
+      "predicted": "사실형,긍정,과거,확실",
+      "correct": true,
+      "original_idx": 2828
+    },
+    {
+      "sentence": "조선 16대 왕 인조는 반정 전 여러 명의 추대 후보 중 하나에 불과했다.",
+      "expected": "사실형,긍정,과거,확실",
+      "predicted": "사실형,긍정,과거,확실",
+      "correct": true,
+      "original_idx": 8979
+    }
+  ]
+}

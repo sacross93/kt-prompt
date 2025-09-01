@@ -1,0 +1,50 @@
+{
+  "batch": 2,
+  "timestamp": "20250829_101704",
+  "accuracy": 0.6666666666666666,
+  "sample_size": 3,
+  "correct_count": 2,
+  "error_analysis": {
+    "error_patterns": {
+      "유형: 추론형 -> 사실형": 1
+    },
+    "common_mistakes": [
+      [
+        "유형: 추론형 -> 사실형",
+        1
+      ]
+    ],
+    "error_examples": [
+      {
+        "sentence": "대출 반납 업무는 기본이고 독서 진흥 행사, 도서관 소식지 발행, 상부 보고 업무 등에 시달려야 했다.",
+        "expected": "추론형,긍정,과거,확실",
+        "predicted": "사실형,긍정,과거,확실",
+        "correct": false,
+        "original_idx": 13345
+      }
+    ]
+  },
+  "detailed_results": [
+    {
+      "sentence": "근무 중 술을 마시던 아파트 경비원을 협박해 돈을 요구하는 등 협박한 입주민이 실형을 선고받았다.",
+      "expected": "사실형,긍정,과거,확실",
+      "predicted": "사실형,긍정,과거,확실",
+      "correct": true,
+      "original_idx": 5184
+    },
+    {
+      "sentence": "대출 반납 업무는 기본이고 독서 진흥 행사, 도서관 소식지 발행, 상부 보고 업무 등에 시달려야 했다.",
+      "expected": "추론형,긍정,과거,확실",
+      "predicted": "사실형,긍정,과거,확실",
+      "correct": false,
+      "original_idx": 13345
+    },
+    {
+      "sentence": "NDC는 지난 2007년 비공개 사내 행사로 시작해 2011년 공개 콘퍼런스로 전환한 국내 게임업계 대표 지식공유 행사다.",
+      "expected": "사실형,긍정,현재,확실",
+      "predicted": "사실형,긍정,현재,확실",
+      "correct": true,
+      "original_idx": 1145
+    }
+  ]
+}

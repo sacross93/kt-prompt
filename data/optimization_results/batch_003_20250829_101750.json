@@ -1,0 +1,50 @@
+{
+  "batch": 3,
+  "timestamp": "20250829_101750",
+  "accuracy": 0.6666666666666666,
+  "sample_size": 3,
+  "correct_count": 2,
+  "error_analysis": {
+    "error_patterns": {
+      "유형: 사실형 -> 추론형": 1
+    },
+    "common_mistakes": [
+      [
+        "유형: 사실형 -> 추론형",
+        1
+      ]
+    ],
+    "error_examples": [
+      {
+        "sentence": "복강경 수술처럼 임플란트 무절개 수술은 최소 침습 수술이기 때문에 수술 후 상처 치유가 빠르고, 창상으로 인한 통증도 거의 없어 수술 후 일상생활을 하는 데 큰 문제가 없다는 장점이 있다.",
+        "expected": "사실형,긍정,현재,확실",
+        "predicted": "추론형,긍정,현재,확실",
+        "correct": false,
+        "original_idx": 9771
+      }
+    ]
+  },
+  "detailed_results": [
+    {
+      "sentence": "이들 기업의 연 매출은 30억달러(약 3조4700억원)에 달한다.",
+      "expected": "사실형,긍정,현재,확실",
+      "predicted": "사실형,긍정,현재,확실",
+      "correct": true,
+      "original_idx": 8624
+    },
+    {
+      "sentence": "＂영화엔 자기 색깔이 있어야 한다.＂",
+      "expected": "추론형,긍정,현재,확실",
+      "predicted": "추론형,긍정,현재,확실",
+      "correct": true,
+      "original_idx": 3388
+    },
+    {
+      "sentence": "복강경 수술처럼 임플란트 무절개 수술은 최소 침습 수술이기 때문에 수술 후 상처 치유가 빠르고, 창상으로 인한 통증도 거의 없어 수술 후 일상생활을 하는 데 큰 문제가 없다는 장점이 있다.",
+      "expected": "사실형,긍정,현재,확실",
+      "predicted": "추론형,긍정,현재,확실",
+      "correct": false,
+      "original_idx": 9771
+    }
+  ]
+}

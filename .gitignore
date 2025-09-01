@@ -85,6 +85,7 @@ checkpoints/
 test_checkpoints/
 demo_checkpoints/
 test_enhanced_checkpoints/
+.kiro/
 
 # Analysis and results
 analysis/

@@ -387,4 +387,70 @@ class GeminiProAnalyzer:
 위 분석을 바탕으로 개선된 시스템 프롬프트를 작성해주세요.
 기존 프롬프트의 좋은 부분은 유지하면서 문제점만 수정하세요.
 """
-        return improvement_prompt
+        return improvement_prompt 
+   
+    async def analyze_prompt_errors(self, analysis_prompt: str) -> str:
+        """프롬프트 오답 분석"""
+        try:
+            logger.info("Gemini 2.5 Pro로 오답 분석 시작")
+            response = self.client.generate_content_with_retry(self.model, analysis_prompt)
+            
+            if not response:
+                raise APIError("Empty response from Gemini Pro")
+            
+            logger.info("오답 분석 완료")
+            return response
+            
+        except Exception as e:
+            logger.error(f"오답 분석 실패: {e}")
+            raise APIError(f"Error analysis failed: {e}")
+    
+    async def generate_improved_prompt(self, improvement_prompt: str) -> str:
+        """개선된 프롬프트 생성"""
+        try:
+            logger.info("Gemini 2.5 Pro로 프롬프트 개선 시작")
+            response = self.client.generate_content_with_retry(self.model, improvement_prompt)
+            
+            if not response:
+                raise APIError("Empty response from Gemini Pro")
+            
+            # 프롬프트 내용만 추출 (마크다운 코드 블록 제거)
+            improved_prompt = self._extract_prompt_content(response)
+            
+            logger.info("프롬프트 개선 완료")
+            return improved_prompt
+            
+        except Exception as e:
+            logger.error(f"프롬프트 개선 실패: {e}")
+            raise APIError(f"Prompt improvement failed: {e}")
+    
+    def _extract_prompt_content(self, response: str) -> str:
+        """응답에서 프롬프트 내용만 추출"""
+        # 마크다운 코드 블록 제거
+        if '```' in response:
+            parts = response.split('```')
+            if len(parts) >= 3:
+                # 첫 번째 코드 블록 내용 사용
+                return parts[1].strip()
+        
+        # 코드 블록이 없으면 전체 응답 사용
+        return response.strip()
+    
+    async def compress_prompt_intelligently(self, compression_prompt: str) -> str:
+        """지능적 프롬프트 압축"""
+        try:
+            logger.info("Gemini 2.5 Pro로 지능적 압축 시작")
+            response = self.client.generate_content_with_retry(self.model, compression_prompt)
+            
+            if not response:
+                raise APIError("Empty response from Gemini Pro")
+            
+            # 압축된 프롬프트 내용 추출
+            compressed_prompt = self._extract_prompt_content(response)
+            
+            logger.info(f"지능적 압축 완료 - 압축: {len(compressed_prompt)}자")
+            return compressed_prompt
+            
+        except Exception as e:
+            logger.error(f"지능적 압축 실패: {e}")
+            raise APIError(f"Intelligent compression failed: {e}")

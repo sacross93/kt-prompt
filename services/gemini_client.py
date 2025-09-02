@@ -79,7 +79,11 @@ class GeminiClient:
             try:
                 logger.debug(f"API call attempt {attempt + 1}/{max_retries + 1}")
                 
-                response = model.generate_content(prompt)
+                # Generate content with temperature setting
+                generation_config = genai.types.GenerationConfig(
+                    temperature=self.config.temperature
+                )
+                response = model.generate_content(prompt, generation_config=generation_config)
                 
                 if not response or not response.text:
                     raise InvalidResponseError("Empty response from API")

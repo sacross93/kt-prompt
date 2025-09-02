@@ -28,8 +28,9 @@ class OptimizationConfig:
     analysis_dir: str = "analysis"
     
     # Model Configuration
-    flash_model: str = "gemini-1.5-flash"
-    pro_model: str = "gemini-1.5-pro"
+    flash_model: str = "gemini-2.5-flash"  # Gemini 2.5 Flash
+    pro_model: str = "gemini-2.5-pro"      # Gemini 2.5 Pro
+    temperature: float = 0.4
     
     # Convergence Settings
     convergence_threshold: float = 0.001  # Stop if improvement < threshold

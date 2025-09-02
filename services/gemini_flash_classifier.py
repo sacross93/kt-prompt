@@ -355,3 +355,45 @@ class GeminiFlashClassifier:
     def get_system_prompt(self) -> str:
         """Get current system prompt"""
         return self.system_prompt
+    
+    async def test_prompt_performance(self, prompt_text: str, samples_csv_path: str) -> Dict[str, Any]:
+        """프롬프트 성능 테스트"""
+        try:
+            import pandas as pd
+            
+            # CSV 파일 로드
+            df = pd.read_csv(samples_csv_path)
+            logger.info(f"Loaded {len(df)} samples from {samples_csv_path}")
+            
+            # 샘플 데이터 준비
+            questions = []
+            correct_answers = []
+            
+            for i, row in df.iterrows():
+                questions.append(f"{i+1}. {row['user_prompt']}")
+                correct_answers.append(f"{i+1}. {row['output'].strip('\"')}")
+            
+            # 배치 크기 제한 (API 제한 고려)
+            max_samples = min(100, len(questions))  # 테스트용으로 100개만
+            questions = questions[:max_samples]
+            correct_answers = correct_answers[:max_samples]
+            
+            logger.info(f"Testing with {len(questions)} samples")
+            
+            # 시스템 프롬프트 업데이트
+            self.update_system_prompt(prompt_text)
+            
+            # 분류 수행
+            predictions = self.classify_batch([q.split('. ', 1)[1] for q in questions])
+            
+            # 결과 분석
+            results = self.get_detailed_results(predictions, correct_answers)
+            results['incorrect_predictions'] = results['total_samples'] - results['correct_predictions']
+            
+            logger.info(f"Test completed. Accuracy: {results['accuracy']:.4f}")
+            
+            return results
+            
+        except Exception as e:
+            logger.error(f"Failed to test prompt performance: {e}")
+            raise APIError(f"Performance test failed: {e}")
